@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wo_Men Haarstudio – Hannover</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#c9a98a;--rose-l:#e8d5c0;--rose-d:#8a6e56;
+  --ink:#0e0d0c;--ink2:#1c1a18;--ink3:#2e2a26;
+  --sand:#f5ede3;--sand2:#ede0d0;
+  --white:#fff;
+  --ff-head:'Playfair Display',Georgia,serif;
+  --ff-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--ff-body);background:var(--ink);color:var(--sand);overflow-x:hidden;font-weight:300}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+::selection{background:var(--rose);color:var(--ink)}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--ink2)}
+::-webkit-scrollbar-thumb{background:var(--rose)}
+
+/* ─── CURSOR DOT ─── */
+#cursor{width:8px;height:8px;background:var(--rose);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,width .3s,height .3s}
+#cursor-ring{width:36px;height:36px;border:1px solid rgba(201,169,138,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .15s ease,width .3s,height .3s}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 4rem;
+  transition:background .5s,padding .4s;
+}
+nav.scrolled{background:rgba(14,13,12,.92);backdrop-filter:blur(20px);padding:1rem 4rem;border-bottom:1px solid rgba(201,169,138,.15)}
+.nav-logo{font-family:var(--ff-head);font-size:1.4rem;color:var(--rose);letter-spacing:.03em;display:flex;flex-direction:column;line-height:1}
+.nav-logo span{font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose-l);font-family:var(--ff-body);font-weight:300;margin-top:2px}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,237,227,.6);transition:color .3s}
+.nav-links a:hover{color:var(--rose)}
+.btn-nav{background:var(--rose);color:var(--ink);padding:.6rem 1.6rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;transition:background .3s,transform .2s;cursor:pointer;border:none;font-family:var(--ff-body)}
+.btn-nav:hover{background:var(--rose-l);transform:translateY(-2px)}
+.nav-ham{display:none;background:none;border:none;color:var(--sand);font-size:1.5rem;cursor:pointer}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;position:relative;display:flex;align-items:center;
+  overflow:hidden;
+}
+.hero-canvas{position:absolute;inset:0}
+/* Animated gradient mesh */
+.hero-canvas::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 80% at 70% 50%,rgba(201,169,138,.12) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 20% 80%,rgba(201,169,138,.08) 0%,transparent 60%),
+    linear-gradient(160deg,#0e0d0c 0%,#1c1a18 40%,#0e0d0c 100%);
+  animation:meshPulse 8s ease-in-out infinite alternate;
+}
+@keyframes meshPulse{
+  from{background-position:0% 50%}
+  to{background-position:100% 50%}
+}
+/* SVG graphic lines in hero */
+.hero-svg{position:absolute;inset:0;width:100%;height:100%;opacity:.18}
+.hero-circle-big{
+  position:absolute;right:-10%;top:-15%;
+  width:700px;height:700px;border-radius:50%;
+  border:1px solid rgba(201,169,138,.25);
+  animation:spin 40s linear infinite;
+}
+.hero-circle-mid{
+  position:absolute;right:5%;top:0%;
+  width:500px;height:500px;border-radius:50%;
+  border:1px solid rgba(201,169,138,.15);
+  animation:spin 28s linear infinite reverse;
+}
+.hero-circle-sm{
+  position:absolute;right:20%;top:15%;
+  width:300px;height:300px;border-radius:50%;
+  border:1px solid rgba(201,169,138,.2);
+  animation:spin 18s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-scissors{
+  position:absolute;right:12%;top:50%;transform:translateY(-50%);
+  opacity:.06;font-size:320px;line-height:1;
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(-50%) rotate(-10deg)}50%{transform:translateY(-52%) rotate(-8deg)}}
+
+.hero-content{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 4rem;padding-top:5rem}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:1rem;
+  font-size:.66rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose);
+  margin-bottom:1.8rem;opacity:0;animation:fadeUp .8s .2s forwards;
+}
+.hero-eyebrow::before{content:'';width:50px;height:1px;background:var(--rose)}
+.hero-h1{
+  font-family:var(--ff-head);font-size:clamp(3.5rem,8vw,7.5rem);
+  font-weight:400;line-height:.95;color:var(--sand);
+  margin-bottom:2rem;max-width:800px;
+  opacity:0;animation:fadeUp .9s .4s forwards;
+}
+.hero-h1 em{color:var(--rose);font-style:italic;display:block}
+.hero-h1 .outline{
+  -webkit-text-stroke:1px rgba(245,237,227,.3);
+  color:transparent;
+}
+.hero-lead{
+  font-size:1rem;color:rgba(245,237,227,.6);max-width:480px;
+  line-height:1.8;margin-bottom:3rem;
+  opacity:0;animation:fadeUp .9s .6s forwards;
+}
+.hero-ctas{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .8s forwards}
+.btn-primary{
+  background:var(--rose);color:var(--ink);padding:1rem 2.4rem;
+  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+  cursor:pointer;border:none;font-family:var(--ff-body);
+  transition:background .3s,transform .2s,box-shadow .3s;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.btn-primary:hover{background:var(--rose-l);transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,169,138,.3)}
+.btn-outline{
+  background:transparent;color:var(--sand);padding:1rem 2.4rem;
+  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
+  cursor:pointer;border:1px solid rgba(245,237,227,.25);font-family:var(--ff-body);
+  transition:border-color .3s,color .3s;display:inline-flex;align-items:center;gap:.6rem;
+}
+.btn-outline:hover{border-color:var(--rose);color:var(--rose)}
+
+.hero-stats{
+  display:flex;gap:3rem;margin-top:5rem;padding-top:2.5rem;
+  border-top:1px solid rgba(201,169,138,.2);
+  opacity:0;animation:fadeUp .9s 1s forwards;
+}
+.hero-stat-num{font-family:var(--ff-head);font-size:2.2rem;color:var(--rose);line-height:1}
+.hero-stat-lbl{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,237,227,.4);margin-top:.3rem}
+
+/* ─── MARQUEE ─── */
+.marquee-wrap{
+  overflow:hidden;border-top:1px solid rgba(201,169,138,.15);
+  border-bottom:1px solid rgba(201,169,138,.15);
+  padding:1.2rem 0;background:var(--ink2);
+}
+.marquee-track{
+  display:flex;gap:3rem;
+  animation:marquee 22s linear infinite;
+  white-space:nowrap;width:max-content;
+}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{
+  display:flex;align-items:center;gap:.8rem;
+  font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,237,227,.35);
+}
+.marquee-dot{width:4px;height:4px;background:var(--rose);border-radius:50%;flex-shrink:0}
+
+/* ─── SECTION COMMON ─── */
+section{padding:7rem 0}
+.container{max-width:1280px;margin:0 auto;padding:0 4rem}
+.sect-tag{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.sect-tag::before{content:'';width:28px;height:1px;background:var(--rose)}
+.sect-title{font-family:var(--ff-head);font-size:clamp(2.2rem,4vw,3.8rem);font-weight:400;color:var(--sand);line-height:1.1}
+.sect-title em{color:var(--rose);font-style:italic}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── SERVICES BENTO GRID ─── */
+#services{background:var(--ink)}
+.bento{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-template-rows:auto;
+  gap:1px;background:rgba(201,169,138,.12);
+  margin-top:3.5rem;
+}
+.bento-cell{
+  background:var(--ink);padding:2.5rem 2rem;
+  position:relative;overflow:hidden;
+  transition:background .4s;cursor:default;
+}
+.bento-cell:hover{background:var(--ink2)}
+.bento-cell::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,169,138,.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .4s;
+}
+.bento-cell:hover::after{opacity:1}
+
+.bc1{grid-column:1/6;grid-row:1}
+.bc2{grid-column:6/10;grid-row:1}
+.bc3{grid-column:10/13;grid-row:1}
+.bc4{grid-column:1/5;grid-row:2}
+.bc5{grid-column:5/9;grid-row:2}
+.bc6{grid-column:9/13;grid-row:2}
+.bc7{grid-column:1/7;grid-row:3}
+.bc8{grid-column:7/13;grid-row:3}
+
+.bc-icon{
+  width:52px;height:52px;border:1px solid rgba(201,169,138,.3);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.5rem;font-size:1.6rem;
+  position:relative;overflow:hidden;
+}
+.bc-icon::before{
+  content:'';position:absolute;inset:0;
+  background:var(--rose);transform:translateX(-100%);
+  transition:transform .4s ease;
+}
+.bento-cell:hover .bc-icon::before{transform:translateX(0)}
+.bc-icon span{position:relative;z-index:1;transition:color .4s}
+.bento-cell:hover .bc-icon span{color:var(--ink)}
+.bc-title{font-family:var(--ff-head);font-size:1.35rem;font-weight:400;color:var(--sand);margin-bottom:.6rem}
+.bc-desc{font-size:.82rem;color:rgba(245,237,227,.45);line-height:1.7}
+.bc-price{
+  margin-top:1.2rem;font-family:var(--ff-head);font-size:1.1rem;
+  color:var(--rose);font-style:italic;
+}
+.bc-tag{
+  position:absolute;top:1.5rem;right:1.5rem;
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  background:rgba(201,169,138,.12);color:var(--rose);
+  padding:.3rem .8rem;border:1px solid rgba(201,169,138,.2);
+}
+
+/* ─── FULL PRICING ─── */
+#pricing{background:var(--ink2)}
+.pricing-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:3.5rem}
+.tab-bar{display:flex;flex-wrap:wrap;gap:0;border:1px solid rgba(201,169,138,.2);overflow:hidden;margin-top:1rem}
+.tab-btn{
+  padding:.7rem 1.5rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  background:none;border:none;color:rgba(245,237,227,.45);cursor:pointer;
+  font-family:var(--ff-body);border-right:1px solid rgba(201,169,138,.2);
+  transition:background .3s,color .3s;
+}
+.tab-btn:last-child{border-right:none}
+.tab-btn.on{background:var(--rose);color:var(--ink)}
+.tab-btn:hover:not(.on){background:rgba(201,169,138,.08);color:var(--rose)}
+.tab-panel{display:none}
+.tab-panel.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:rgba(201,169,138,.1)}
+.price-card{background:var(--ink2);padding:1.8rem}
+.price-card-head{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:1.2rem;border-bottom:1px solid rgba(201,169,138,.12);margin-bottom:1.2rem}
+.price-card-name{font-family:var(--ff-head);font-size:1.1rem;color:var(--sand)}
+.price-card-badge{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);background:rgba(201,169,138,.1);padding:.25rem .6rem;border:1px solid rgba(201,169,138,.2)}
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid rgba(201,169,138,.07);font-size:.85rem}
+.price-row:last-child{border-bottom:none}
+.price-row-name{color:rgba(245,237,227,.65)}
+.price-row-val{color:var(--rose);font-family:var(--ff-head);font-size:1rem}
+
+/* ─── ABOUT ─── */
+#about{background:var(--ink)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-visual{position:relative}
+.about-frame{
+  width:100%;aspect-ratio:3/4;
+  background:var(--ink3);
+  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+}
+.about-frame-inner{
+  width:100%;height:100%;
+  background:linear-gradient(160deg,#2e2a26,#1c1a18);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+}
+/* Big decorative scissors graphic */
+.scissors-svg{width:60%;opacity:.15}
+.about-badge{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  width:160px;height:160px;border-radius:50%;
+  background:var(--rose);color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+}
+.about-badge-num{font-family:var(--ff-head);font-size:2.2rem;font-weight:700;line-height:1}
+.about-badge-lbl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;margin-top:.3rem;font-weight:500}
+.about-tag-line{
+  position:absolute;top:1.5rem;left:1.5rem;
+  font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--rose);background:var(--ink);padding:.4rem .9rem;
+  border:1px solid rgba(201,169,138,.2);
+}
+.about-content{}
+.about-body{font-size:.94rem;color:rgba(245,237,227,.65);line-height:1.95;margin-top:1.5rem}
+.about-body p+p{margin-top:1.2rem}
+.about-promises{list-style:none;margin-top:2rem;display:flex;flex-direction:column;gap:.6rem}
+.about-promises li{
+  display:flex;align-items:flex-start;gap:1rem;
+  font-size:.88rem;color:rgba(245,237,227,.7);
+  padding:.8rem 1rem;border:1px solid rgba(201,169,138,.1);
+  transition:border-color .3s,background .3s;
+}
+.about-promises li:hover{border-color:rgba(201,169,138,.35);background:rgba(201,169,138,.04)}
+.about-promises li::before{
+  content:'✦';color:var(--rose);font-size:.7rem;margin-top:.15rem;flex-shrink:0;
+}
+
+/* ─── PARALLAX QUOTE BANNER ─── */
+#quote-band{
+  padding:6rem 0;
+  background:var(--rose);position:relative;overflow:hidden;
+}
+#quote-band::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='40' cy='40' r='35' stroke='%230e0d0c' stroke-opacity='.04' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E") repeat;
+  opacity:.5;
+}
+.quote-inner{position:relative;z-index:1;text-align:center;max-width:900px;margin:0 auto;padding:0 4rem}
+.quote-mark{font-family:var(--ff-head);font-size:8rem;line-height:.5;color:rgba(14,13,12,.15);margin-bottom:1rem}
+.quote-text{font-family:var(--ff-head);font-size:clamp(1.6rem,3.5vw,3rem);font-weight:400;font-style:italic;color:var(--ink);line-height:1.3}
+.quote-attr{margin-top:1.5rem;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(14,13,12,.5)}
+
+/* ─── BOOKING ─── */
+#booking{background:var(--ink)}
+.booking-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start}
+.booking-visual{position:relative}
+.booking-deco{
+  background:var(--ink2);border:1px solid rgba(201,169,138,.15);
+  padding:3rem;display:flex;flex-direction:column;gap:2rem;
+}
+.booking-deco-row{display:flex;align-items:center;gap:1.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(201,169,138,.1)}
+.booking-deco-row:last-child{border-bottom:none;padding-bottom:0}
+.deco-num{font-family:var(--ff-head);font-size:3.5rem;font-weight:700;color:rgba(201,169,138,.15);line-height:1;min-width:60px}
+.deco-title{font-size:.9rem;color:var(--sand);font-weight:400;margin-bottom:.3rem}
+.deco-body{font-size:.8rem;color:rgba(245,237,227,.45);line-height:1.7}
+.contact-pill{
+  display:flex;align-items:center;gap:1rem;
+  background:rgba(201,169,138,.08);border:1px solid rgba(201,169,138,.2);
+  padding:1.2rem 1.5rem;margin-top:2rem;
+  transition:background .3s;
+}
+.contact-pill:hover{background:rgba(201,169,138,.14)}
+.pill-icon{font-size:1.4rem;flex-shrink:0}
+.pill-lbl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:.2rem}
+.pill-val{font-family:var(--ff-head);font-size:1.3rem;color:var(--sand)}
+
+/* FORM */
+.bform{background:var(--ink2);padding:2.8rem;border:1px solid rgba(201,169,138,.12)}
+.bform-head{margin-bottom:2rem}
+.bform-title{font-family:var(--ff-head);font-size:1.8rem;color:var(--sand);margin-bottom:.3rem}
+.bform-sub{font-size:.8rem;color:rgba(245,237,227,.4)}
+.fg{margin-bottom:1rem}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+label.fl{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:.5rem}
+.fc{
+  width:100%;background:var(--ink3);border:1px solid rgba(201,169,138,.18);
+  color:var(--sand);padding:.8rem 1rem;font-family:var(--ff-body);
+  font-size:.9rem;font-weight:300;outline:none;
+  transition:border-color .3s;-webkit-appearance:none;appearance:none;
+  border-radius:0;
+}
+.fc:focus{border-color:var(--rose)}
+.fc option{background:var(--ink3)}
+textarea.fc{resize:vertical;min-height:90px}
+.form-submit-btn{
+  width:100%;padding:1.1rem;background:var(--rose);border:none;
+  color:var(--ink);font-family:var(--ff-body);font-size:.75rem;
+  letter-spacing:.2em;text-transform:uppercase;font-weight:500;cursor:pointer;
+  transition:background .3s,transform .2s;margin-top:.5rem;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.form-submit-btn:hover{background:var(--rose-l);transform:translateY(-2px)}
+.success-box{display:none;text-align:center;padding:3rem 2rem}
+.success-circle{
+  width:64px;height:64px;border-radius:50%;
+  border:1px solid var(--rose);display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.5rem;font-size:1.5rem;color:var(--rose);
+}
+.success-title{font-family:var(--ff-head);font-size:1.8rem;color:var(--sand);margin-bottom:.5rem}
+.success-body{font-size:.85rem;color:rgba(245,237,227,.5)}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--ink2)}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,169,138,.12);margin-top:3.5rem}
+.c-card{background:var(--ink2);padding:2.5rem 2rem;border-top:2px solid transparent;transition:border-color .4s,background .3s}
+.c-card:hover{border-top-color:var(--rose);background:var(--ink3)}
+.c-card-icon{
+  width:48px;height:48px;border:1px solid rgba(201,169,138,.25);
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  margin-bottom:1.5rem;
+}
+.c-card-lbl{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:.6rem}
+.c-card-val{font-size:.92rem;color:rgba(245,237,227,.75);line-height:1.8}
+.c-card-val a{color:rgba(245,237,227,.75);transition:color .3s}
+.c-card-val a:hover{color:var(--rose)}
+.hours-tbl{width:100%;border-collapse:collapse;margin-top:.3rem}
+.hours-tbl td{padding:.25rem 0;font-size:.85rem}
+.hours-tbl td:first-child{color:rgba(245,237,227,.35)}
+.hours-tbl td:last-child{text-align:right;color:rgba(245,237,227,.75)}
+.hours-closed{color:rgba(245,237,227,.25)!important}
+.social-row{display:flex;gap:.8rem;margin-top:1rem}
+.soc-btn{
+  width:42px;height:42px;border:1px solid rgba(201,169,138,.2);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;
+  color:rgba(245,237,227,.5);transition:border-color .3s,color .3s,background .3s;
+}
+.soc-btn:hover{border-color:var(--rose);color:var(--rose);background:rgba(201,169,138,.08)}
+
+/* ─── MAP PLACEHOLDER ─── */
+.map-wrap{
+  margin-top:4rem;height:300px;
+  background:var(--ink3);border:1px solid rgba(201,169,138,.12);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+  position:relative;overflow:hidden;
+}
+.map-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(0deg,rgba(201,169,138,.04) 0,rgba(201,169,138,.04) 1px,transparent 1px,transparent 60px),
+    repeating-linear-gradient(90deg,rgba(201,169,138,.04) 0,rgba(201,169,138,.04) 1px,transparent 1px,transparent 60px);
+}
+.map-pin{font-size:2.5rem;position:relative;z-index:1}
+.map-text{font-size:.8rem;color:rgba(245,237,227,.4);position:relative;z-index:1;text-align:center}
+.map-btn{position:relative;z-index:1}
+
+/* ─── FOOTER ─── */
+footer{background:#090807;padding:4rem 0 2rem;border-top:1px solid rgba(201,169,138,.12)}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;padding-bottom:3rem;border-bottom:1px solid rgba(201,169,138,.1)}
+.footer-brand{}
+.footer-logo{font-family:var(--ff-head);font-size:1.8rem;color:var(--rose);margin-bottom:.5rem}
+.footer-tagline{font-size:.78rem;color:rgba(245,237,227,.35);letter-spacing:.1em}
+.footer-cols{display:flex;gap:4rem;flex-wrap:wrap}
+.footer-col-title{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--rose);margin-bottom:1.2rem}
+.footer-col a{display:block;font-size:.85rem;color:rgba(245,237,227,.4);margin-bottom:.6rem;transition:color .3s}
+.footer-col a:hover{color:var(--rose)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.footer-copy{font-size:.72rem;color:rgba(245,237,227,.2)}
+.footer-soc{display:flex;gap:.8rem}
+
+/* ─── MOBILE ─── */
+@media(max-width:1024px){
+  .bento{grid-template-columns:1fr 1fr}
+  .bc1,.bc2,.bc3,.bc4,.bc5,.bc6,.bc7,.bc8{grid-column:auto;grid-row:auto}
+  .about-grid,.booking-grid{grid-template-columns:1fr;gap:3rem}
+  .about-visual{order:-1}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  nav.scrolled{padding:.8rem 1.5rem}
+  .nav-links{display:none;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(14,13,12,.97);align-items:center;justify-content:center;gap:2rem;font-size:1rem}
+  .nav-links.open{display:flex}
+  .nav-ham{display:block}
+  .hero-content{padding:0 1.5rem;padding-top:5rem}
+  .container{padding:0 1.5rem}
+  .contact-grid{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .tab-panel.on{grid-template-columns:1fr}
+  .fg-row{grid-template-columns:1fr}
+  .hero-circle-big,.hero-circle-mid,.hero-circle-sm{display:none}
+  .footer-cols{gap:2rem}
+  section{padding:4.5rem 0}
+  .hero-stats{flex-wrap:wrap;gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Wo_Men<span>Haarstudio · Hannover</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services" onclick="closeNav()">Leistungen</a></li>
+    <li><a href="#pricing" onclick="closeNav()">Preise</a></li>
+    <li><a href="#about" onclick="closeNav()">Über uns</a></li>
+    <li><a href="#contact" onclick="closeNav()">Kontakt</a></li>
+    <li><button class="btn-nav" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'});closeNav()">Termin buchen ↗</button></li>
+  </ul>
+  <button class="nav-ham" id="navHam" onclick="toggleNav()">☰</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-canvas">
+    <svg class="hero-svg" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- decorative lines -->
+      <line x1="0" y1="450" x2="1400" y2="450" stroke="#c9a98a" stroke-opacity=".1" stroke-width=".5"/>
+      <line x1="700" y1="0" x2="700" y2="900" stroke="#c9a98a" stroke-opacity=".06" stroke-width=".5"/>
+      <path d="M0 0 L700 900" stroke="#c9a98a" stroke-opacity=".04" stroke-width=".5"/>
+      <path d="M1400 0 L700 900" stroke="#c9a98a" stroke-opacity=".04" stroke-width=".5"/>
+      <!-- corner accents -->
+      <rect x="20" y="20" width="60" height="60" fill="none" stroke="#c9a98a" stroke-opacity=".2" stroke-width=".7"/>
+      <rect x="1320" y="820" width="60" height="60" fill="none" stroke="#c9a98a" stroke-opacity=".2" stroke-width=".7"/>
+      <!-- large circle -->
+      <circle cx="1050" cy="450" r="380" fill="none" stroke="#c9a98a" stroke-opacity=".08" stroke-width=".8"/>
+      <circle cx="1050" cy="450" r="280" fill="none" stroke="#c9a98a" stroke-opacity=".06" stroke-width=".5"/>
+      <circle cx="1050" cy="450" r="180" fill="none" stroke="#c9a98a" stroke-opacity=".1" stroke-width=".5"/>
+      <!-- scissors path artistic -->
+      <path d="M900,300 Q950,350 1000,300 Q1050,250 1100,300 L1000,450 L900,600 Q850,550 900,500 Q950,450 900,400 Z" fill="none" stroke="#c9a98a" stroke-opacity=".06" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="hero-circle-big"></div>
+  <div class="hero-circle-mid"></div>
+  <div class="hero-circle-sm"></div>
+  <div class="hero-scissors">✂</div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Haarstudio Wo_Men · Hannover</div>
+    <h1 class="hero-h1">
+      Wo Schönheit
+      <em>zur Kunst wird.</em>
+      <span class="outline">Wo_Men.</span>
+    </h1>
+    <p class="hero-lead">In familiärer, freundlicher Atmosphäre gestalten wir Ihren Friseurbesuch zu einem entspannten, angenehmen Erlebnis – handwerklich einwandfreie Qualität zu vernünftigen Preisen.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Termin vereinbaren ↗</button>
+      <a href="#services" class="btn-outline">Leistungen entdecken →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">Di–Fr</div><div class="hero-stat-lbl">9:30 – 18:00 Uhr</div></div>
+      <div><div class="hero-stat-num">Sa</div><div class="hero-stat-lbl">9:00 – 14:00 Uhr</div></div>
+      <div><div class="hero-stat-num">8+</div><div class="hero-stat-lbl">Leistungen</div></div>
+      <div><div class="hero-stat-num">Hannover</div><div class="hero-stat-lbl">Tempelhofweg 4, 30179</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item"><span class="marquee-dot"></span>Damenfriseur</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Herrenfriseur</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Balayage</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Ombré</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Foliensträhnen</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Permanent Make-up</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Nagel Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Brautfrisur</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Extensions</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Keratin Behandlung</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Microblading</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Dauerwelle</div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><span class="marquee-dot"></span>Damenfriseur</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Herrenfriseur</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Balayage</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Ombré</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Foliensträhnen</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Permanent Make-up</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Nagel Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Brautfrisur</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Extensions</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Keratin Behandlung</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Microblading</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Dauerwelle</div>
+  </div>
+</div>
+
+<!-- ─── SERVICES BENTO ─── -->
+<section id="services">
+  <div class="container reveal">
+    <div class="sect-tag">Unsere Leistungen</div>
+    <h2 class="sect-title">Alles für Ihren <em>perfekten Auftritt</em></h2>
+  </div>
+  <div class="container reveal">
+    <div class="bento">
+      <div class="bento-cell bc1">
+        <div class="bc-tag">Damen</div>
+        <div class="bc-icon"><span>✂</span></div>
+        <div class="bc-title">Damenfriseur</div>
+        <div class="bc-desc">Waschen · Schneiden · Föhnen/Legen. Typgerechte und pflegeleichte Frisuren für jeden Tag – sowie extravagante Looks für besondere Anlässe.</div>
+        <div class="bc-price">ab 22 €</div>
+      </div>
+      <div class="bento-cell bc2">
+        <div class="bc-icon"><span>⚡</span></div>
+        <div class="bc-title">Herrenfriseur</div>
+        <div class="bc-desc">Klassischer Haarschnitt, Maschinenschnitt, Bart und Konturschnitt – präzise und stilsicher.</div>
+        <div class="bc-price">ab 8 €</div>
+      </div>
+      <div class="bento-cell bc3">
+        <div class="bc-icon"><span>◈</span></div>
+        <div class="bc-title">Farbe & Tönung</div>
+        <div class="bc-desc">Färben und Tönen in allen Längen.</div>
+        <div class="bc-price">ab 40 €</div>
+      </div>
+      <div class="bento-cell bc4">
+        <div class="bc-tag">Trend</div>
+        <div class="bc-icon"><span>✦</span></div>
+        <div class="bc-title">Balayage · Ombré · Painting</div>
+        <div class="bc-desc">Moderne Farbverläufe für einen natürlichen, strahlenden Look – je nach Haarlänge individuell angepasst.</div>
+        <div class="bc-price">ab 150 €</div>
+      </div>
+      <div class="bento-cell bc5">
+        <div class="bc-icon"><span>❋</span></div>
+        <div class="bc-title">Foliensträhnen</div>
+        <div class="bc-desc">Präzise gesetzte Strähnen für mehr Dimension und Tiefe – kurz bis lang.</div>
+        <div class="bc-price">ab 60 €</div>
+      </div>
+      <div class="bento-cell bc6">
+        <div class="bc-tag">Special</div>
+        <div class="bc-icon"><span>♛</span></div>
+        <div class="bc-title">Braut & Hochsteck</div>
+        <div class="bc-desc">Unvergessliche Hochsteckfrisuren und Braut Make-up – für den schönsten Tag Ihres Lebens.</div>
+        <div class="bc-price">ab 55 €</div>
+      </div>
+      <div class="bento-cell bc7">
+        <div class="bc-icon"><span>◉</span></div>
+        <div class="bc-title">Permanent Make-up & Microblading</div>
+        <div class="bc-desc">Augenbrauen · Lippen · Augenlider · Microblading · Microshading – zeitlos schön, täglich stressfrei. Professionelle Pigmentierung für ein dauerhaft gepflegtes Erscheinungsbild.</div>
+        <div class="bc-price">250 € je Behandlung</div>
+      </div>
+      <div class="bento-cell bc8">
+        <div class="bc-icon"><span>✿</span></div>
+        <div class="bc-title">Nagel Design · Extensions · Glättung</div>
+        <div class="bc-desc">Gel-Modelage · Maniküre · Haarverlängerung · Dauerglättung · Keratinbehandlung · Dauerwelle – rundum schön von Kopf bis Fuß.</div>
+        <div class="bc-price">ab 10 €</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-top reveal">
+      <div>
+        <div class="sect-tag">Preisliste</div>
+        <h2 class="sect-title">Transparente <em>Preise</em></h2>
+      </div>
+      <div class="tab-bar">
+        <button class="tab-btn on" onclick="showTab('damen')">Damen</button>
+        <button class="tab-btn" onclick="showTab('herren')">Herren</button>
+        <button class="tab-btn" onclick="showTab('straehnen')">Strähnen & Farbe</button>
+        <button class="tab-btn" onclick="showTab('special')">Special</button>
+        <button class="tab-btn" onclick="showTab('nagel')">Nagel & Make-up</button>
+        <button class="tab-btn" onclick="showTab('extras')">Extras</button>
+      </div>
+    </div>
+
+    <!-- DAMEN -->
+    <div class="tab-panel on reveal" id="tp-damen">
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Waschen, Schneiden, Föhnen</div><div class="price-card-badge">Damen</div></div>
+        <div class="price-row"><span class="price-row-name">Kurz</span><span class="price-row-val">30,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mittel</span><span class="price-row-val">40,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lang</span><span class="price-row-val">55,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Waschen, Schneiden, selbst föhnen</div><div class="price-card-badge">Damen</div></div>
+        <div class="price-row"><span class="price-row-name">Kurz</span><span class="price-row-val">30,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mittel</span><span class="price-row-val">40,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lang</span><span class="price-row-val">50,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Waschen, Schneiden, Föhnen/Legen (inkl. Festiger)</div><div class="price-card-badge">Damen</div></div>
+        <div class="price-row"><span class="price-row-name">Kurz</span><span class="price-row-val">40,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mittel</span><span class="price-row-val">50,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lang</span><span class="price-row-val">60,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Waschen, Föhnen/Legen (inkl. Festiger)</div><div class="price-card-badge">Damen</div></div>
+        <div class="price-row"><span class="price-row-name">Kurz</span><span class="price-row-val">22,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mittel</span><span class="price-row-val">29,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lang</span><span class="price-row-val">42,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Weitere Damen-Leistungen</div></div>
+        <div class="price-row"><span class="price-row-name">Hochsteckfrisur</span><span class="price-row-val">ab 55,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Brautfrisur</span><span class="price-row-val">ab 75,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Braut Make-up</span><span class="price-row-val">ab 75,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Dauerwelle kurz / mittel / lang</span><span class="price-row-val">90 / 96 / 120 €</span></div>
+        <div class="price-row"><span class="price-row-name">Splitschnitt</span><span class="price-row-val">30,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Kinderhaarschnitt (1–10 J.)</span><span class="price-row-val">15,– €</span></div>
+      </div>
+    </div>
+
+    <!-- HERREN -->
+    <div class="tab-panel" id="tp-herren">
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Haarschnitt</div><div class="price-card-badge">Herren</div></div>
+        <div class="price-row"><span class="price-row-name">Waschen, Schneiden, Föhnen</span><span class="price-row-val">24,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Herrenhaarschnitt</span><span class="price-row-val">24,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Maschinenschnitt (inkl. Waschen)</span><span class="price-row-val">15,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Bart & Rasur</div><div class="price-card-badge">Herren</div></div>
+        <div class="price-row"><span class="price-row-name">Bart</span><span class="price-row-val">10,– / 12,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Seitenrasur</span><span class="price-row-val">8,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Konturschnitt</span><span class="price-row-val">5,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Styling</div><div class="price-card-badge">Herren</div></div>
+        <div class="price-row"><span class="price-row-name">Gel</span><span class="price-row-val">1,90 €</span></div>
+        <div class="price-row"><span class="price-row-name">Haarfestiger</span><span class="price-row-val">3,50 €</span></div>
+        <div class="price-row"><span class="price-row-name">Haarspray</span><span class="price-row-val">2,50 €</span></div>
+      </div>
+    </div>
+
+    <!-- STRÄHNEN & FARBE -->
+    <div class="tab-panel" id="tp-straehnen">
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Foliensträhnen</div><div class="price-card-badge">Strähnen</div></div>
+        <div class="price-row"><span class="price-row-name">Kurz</span><span class="price-row-val">ab 60,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mittel</span><span class="price-row-val">ab 80,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lang</span><span class="price-row-val">ab 120,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Balayage · Ombré · Painting</div><div class="price-card-badge">Trend</div></div>
+        <div class="price-row"><span class="price-row-name">Je nach Länge</span><span class="price-row-val">ab 150,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Färben</div><div class="price-card-badge">Farbe</div></div>
+        <div class="price-row"><span class="price-row-name">Kurz</span><span class="price-row-val">40,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mittel</span><span class="price-row-val">47,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lang</span><span class="price-row-val">ab 65,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Tönung</div><div class="price-card-badge">Farbe</div></div>
+        <div class="price-row"><span class="price-row-name">Kurz</span><span class="price-row-val">40,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mittel</span><span class="price-row-val">47,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lang</span><span class="price-row-val">ab 65,– €</span></div>
+      </div>
+    </div>
+
+    <!-- SPECIAL -->
+    <div class="tab-panel" id="tp-special">
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Glättung</div><div class="price-card-badge">Treatment</div></div>
+        <div class="price-row"><span class="price-row-name">Dauerglättung</span><span class="price-row-val">ab 200,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Keratinbehandlung</span><span class="price-row-val">ab 200,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Extensions & Haarverlängerung</div><div class="price-card-badge">Extensions</div></div>
+        <div class="price-row"><span class="price-row-name">Pro Strähne</span><span class="price-row-val">10,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mehrere Extensions</span><span class="price-row-val">nach Absprache</span></div>
+        <div class="price-row"><span class="price-row-name">Haarverlängerung / Verdichtung</span><span class="price-row-val">ab 350,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Dauerwelle</div><div class="price-card-badge">Welle</div></div>
+        <div class="price-row"><span class="price-row-name">Kurz</span><span class="price-row-val">90,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Mittel</span><span class="price-row-val">96,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lang</span><span class="price-row-val">120,– €</span></div>
+      </div>
+    </div>
+
+    <!-- NAGEL & MAKE-UP -->
+    <div class="tab-panel" id="tp-nagel">
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Nagel Design – Gel Modelage</div><div class="price-card-badge">Nägel</div></div>
+        <div class="price-row"><span class="price-row-name">Neu Modelage</span><span class="price-row-val">45,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Nachfüllen</span><span class="price-row-val">40,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Klassische Maniküre</span><span class="price-row-val">15,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Strassstein (je Stück)</span><span class="price-row-val">0,50 €</span></div>
+        <div class="price-row"><span class="price-row-name">Schablonen / Zeichnungen</span><span class="price-row-val">ab 5,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Permanent Make-up</div><div class="price-card-badge">Make-up</div></div>
+        <div class="price-row"><span class="price-row-name">Augenbrauen</span><span class="price-row-val">250,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Lippen</span><span class="price-row-val">250,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Augenlider</span><span class="price-row-val">250,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Microblading</span><span class="price-row-val">250,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Microshading</span><span class="price-row-val">250,– €</span></div>
+      </div>
+    </div>
+
+    <!-- EXTRAS -->
+    <div class="tab-panel" id="tp-extras">
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Haarpflege</div><div class="price-card-badge">Pflege</div></div>
+        <div class="price-row"><span class="price-row-name">Spülung / Schnellkur</span><span class="price-row-val">5,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Intensivkur</span><span class="price-row-val">7,– €</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Styling Produkte</div><div class="price-card-badge">Styling</div></div>
+        <div class="price-row"><span class="price-row-name">Gel</span><span class="price-row-val">1,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Haarfestiger</span><span class="price-row-val">1,– €</span></div>
+        <div class="price-row"><span class="price-row-name">Haarspray</span><span class="price-row-val">nach Absprache</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head"><div class="price-card-name">Kinder</div><div class="price-card-badge">Kids</div></div>
+        <div class="price-row"><span class="price-row-name">Kinderhaarschnitt (1–10 Jahre)</span><span class="price-row-val">15,– €</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-frame">
+          <div class="about-frame-inner">
+            <!-- Decorative SVG scissors illustration -->
+            <svg class="scissors-svg" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="80" cy="80" r="50" stroke="#c9a98a" stroke-width="2"/>
+              <circle cx="80" cy="80" r="30" fill="none" stroke="#c9a98a" stroke-width="1"/>
+              <circle cx="80" cy="80" r="12" fill="#c9a98a" opacity=".3"/>
+              <circle cx="220" cy="80" r="50" stroke="#c9a98a" stroke-width="2"/>
+              <circle cx="220" cy="80" r="30" fill="none" stroke="#c9a98a" stroke-width="1"/>
+              <circle cx="220" cy="80" r="12" fill="#c9a98a" opacity=".3"/>
+              <line x1="80" y1="80" x2="150" y2="400" stroke="#c9a98a" stroke-width="18" stroke-linecap="round"/>
+              <line x1="220" y1="80" x2="150" y2="400" stroke="#c9a98a" stroke-width="18" stroke-linecap="round"/>
+              <line x1="80" y1="80" x2="220" y2="80" stroke="#c9a98a" stroke-width="3" stroke-dasharray="8 4"/>
+              <!-- comb -->
+              <rect x="20" y="280" width="260" height="8" rx="4" fill="#c9a98a" opacity=".2"/>
+              <line x1="40" y1="288" x2="40" y2="320" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="65" y1="288" x2="65" y2="320" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="90" y1="288" x2="90" y2="310" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="115" y1="288" x2="115" y2="320" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="140" y1="288" x2="140" y2="310" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="165" y1="288" x2="165" y2="320" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="190" y1="288" x2="190" y2="310" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="215" y1="288" x2="215" y2="320" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="240" y1="288" x2="240" y2="310" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+              <line x1="265" y1="288" x2="265" y2="320" stroke="#c9a98a" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+            </svg>
+          </div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">100%</div>
+          <div class="about-badge-lbl">Zufriedenheit</div>
+        </div>
+        <div class="about-tag-line">Tempelhofweg 4 · Hannover</div>
+      </div>
+      <div class="about-content reveal">
+        <div class="sect-tag">Über uns</div>
+        <h2 class="sect-title">Leidenschaft für <em>Perfektion</em></h2>
+        <div class="about-body">
+          <p>Wir sind Perfektionisten und bemüht, immer das beste Ergebnis für unsere oft sehr unterschiedlichen Kunden zu erreichen. Schere und Kamm, Rasierer und Fön – obwohl sich die Werkzeuge des Friseurs seit Jahrzehnten nicht verändert haben, entstehen laufend neue Möglichkeiten und Trends für einen kreativen Einsatz.</p>
+          <p>Jeder einzelne verlässt unseren Salon stets glücklich und bei bester Laune – und das zaubert dann auch ein Lächeln auf unsere Gesichter. Die Begeisterung für Schönheit und Wohlbefinden bereitet uns täglich Freude. Kommen Sie zu uns und lassen Sie sich verwöhnen.</p>
+          <p><strong style="color:var(--rose)">Wir freuen uns auf Euren Besuch! – Ihr Team von Haarstudio Wo_Men</strong></p>
+        </div>
+        <ul class="about-promises">
+          <li>Wir stylen typgerechte Frisuren, um Ihre Persönlichkeit zu unterstreichen</li>
+          <li>Mit Farbe, Strähnen und Welle veredeln wir gekonnt Ihr Haar</li>
+          <li>Das individuelle Make-up für jeden Anlass</li>
+          <li>Ball, Hochzeit oder einfach so – wir sind TOP beim Hochstecken</li>
+          <li>Natur pur – Haar und Haut schonende Produkte</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUOTE BANNER ─── -->
+<div id="quote-band">
+  <div class="quote-inner">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">Eleganz bedeutet nicht aufzufallen, sondern in Erinnerung zu bleiben.</p>
+    <div class="quote-attr">Haarstudio Wo_Men · Hannover</div>
+  </div>
+</div>
+
+<!-- ─── BOOKING ─── -->
+<section id="booking">
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-visual reveal">
+        <div class="sect-tag">Terminbuchung</div>
+        <h2 class="sect-title">Ihren Termin <em>vereinbaren</em></h2>
+        <div style="margin-top:1rem;margin-bottom:2.5rem;font-size:.9rem;color:rgba(245,237,227,.55);line-height:1.9">
+          Senden Sie uns Ihre Terminanfrage und wir melden uns schnellstmöglich bei Ihnen. Alternativ rufen Sie uns direkt an!
+        </div>
+        <div class="booking-deco">
+          <div class="booking-deco-row">
+            <div class="deco-num">01</div>
+            <div>
+              <div class="deco-title">Leistung auswählen</div>
+              <div class="deco-body">Wählen Sie aus unserem Angebot – von Haarschnitt über Farbe bis Permanent Make-up.</div>
+            </div>
+          </div>
+          <div class="booking-deco-row">
+            <div class="deco-num">02</div>
+            <div>
+              <div class="deco-title">Wunschtermin nennen</div>
+              <div class="deco-body">Geben Sie Ihren bevorzugten Tag und die gewünschte Uhrzeit an.</div>
+            </div>
+          </div>
+          <div class="booking-deco-row">
+            <div class="deco-num">03</div>
+            <div>
+              <div class="deco-title">Bestätigung erhalten</div>
+              <div class="deco-body">Wir bestätigen Ihren Termin telefonisch oder per E-Mail innerhalb von 24 Stunden.</div>
+            </div>
+          </div>
+        </div>
+        <a href="tel:051164613277" class="contact-pill">
+          <div class="pill-icon">📞</div>
+          <div>
+            <div class="pill-lbl">Direkt anrufen</div>
+            <div class="pill-val">0511 / 646 132 77</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="reveal">
+        <div class="bform" id="bookingForm">
+          <div class="bform-head">
+            <div class="bform-title">Termin anfragen</div>
+            <div class="bform-sub">Mit * markierte Felder sind Pflichtfelder</div>
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label class="fl">Vorname *</label><input class="fc" id="fn" type="text" placeholder="Vorname"></div>
+            <div class="fg"><label class="fl">Nachname *</label><input class="fc" id="ln" type="text" placeholder="Nachname"></div>
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label class="fl">Telefon *</label><input class="fc" id="ph" type="tel" placeholder="0511 / ..."></div>
+            <div class="fg"><label class="fl">E-Mail</label><input class="fc" id="em" type="email" placeholder="ihre@email.de"></div>
+          </div>
+          <div class="fg"><label class="fl">Gewünschte Leistung *</label>
+            <select class="fc" id="svc">
+              <option value="" disabled selected>Bitte wählen...</option>
+              <optgroup label="─── Damen ───">
+                <option>Waschen, Schneiden, Föhnen – Damen</option>
+                <option>Waschen, Föhnen / Legen – Damen</option>
+                <option>Hochsteckfrisur</option>
+                <option>Brautfrisur & Braut Make-up</option>
+                <option>Dauerwelle</option>
+                <option>Splitschnitt</option>
+              </optgroup>
+              <optgroup label="─── Herren ───">
+                <option>Waschen, Schneiden, Föhnen – Herren</option>
+                <option>Maschinenschnitt</option>
+                <option>Bartpflege / Rasur</option>
+                <option>Konturschnitt</option>
+              </optgroup>
+              <optgroup label="─── Farbe & Strähnen ───">
+                <option>Färben / Tönung</option>
+                <option>Foliensträhnen</option>
+                <option>Balayage / Ombré / Painting</option>
+              </optgroup>
+              <optgroup label="─── Special ───">
+                <option>Dauerglättung / Keratinbehandlung</option>
+                <option>Extensions / Haarverlängerung</option>
+              </optgroup>
+              <optgroup label="─── Nagel & Make-up ───">
+                <option>Gel Neu Modelage / Nachfüllen</option>
+                <option>Klassische Maniküre</option>
+                <option>Permanent Make-up</option>
+                <option>Microblading / Microshading</option>
+              </optgroup>
+              <option>Kinderhaarschnitt (1–10 Jahre)</option>
+              <option>Anderes / Beratungsgespräch</option>
+            </select>
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label class="fl">Wunschdatum *</label><input class="fc" id="dt" type="date"></div>
+            <div class="fg"><label class="fl">Wunschzeit</label>
+              <select class="fc" id="tm">
+                <option value="" disabled selected>Uhrzeit wählen</option>
+                <option>09:00 Uhr</option><option>09:30 Uhr</option>
+                <option>10:00 Uhr</option><option>10:30 Uhr</option>
+                <option>11:00 Uhr</option><option>11:30 Uhr</option>
+                <option>12:00 Uhr</option><option>12:30 Uhr</option>
+                <option>13:00 Uhr</option><option>13:30 Uhr</option>
+                <option>14:00 Uhr</option><option>14:30 Uhr</option>
+                <option>15:00 Uhr</option><option>15:30 Uhr</option>
+                <option>16:00 Uhr</option><option>16:30 Uhr</option>
+                <option>17:00 Uhr</option><option>17:30 Uhr</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg"><label class="fl">Anmerkungen</label><textarea class="fc" id="nt" placeholder="Besondere Wünsche, Haartyp, Vorstellungen..."></textarea></div>
+          <button class="form-submit-btn" onclick="handleSubmit()">Terminanfrage absenden ↗</button>
+        </div>
+        <div class="success-box" id="successBox">
+          <div class="success-circle">✓</div>
+          <div class="success-title">Vielen Dank!</div>
+          <div class="success-body">Ihre Anfrage wurde erfolgreich gesendet.<br>Wir melden uns schnellstmöglich bei Ihnen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="sect-tag">Kontakt & Anfahrt</div>
+      <h2 class="sect-title">So erreichen <em>Sie uns</em></h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="c-card">
+        <div class="c-card-icon">✦</div>
+        <div class="c-card-lbl">Adresse</div>
+        <div class="c-card-val">
+          Tempelhofweg 4<br>30179 Hannover<br><br>
+          <a href="https://maps.google.com/?q=Tempelhofweg+4+30179+Hannover" target="_blank" style="color:var(--rose);font-size:.82rem;">→ In Google Maps öffnen</a>
+        </div>
+      </div>
+      <div class="c-card">
+        <div class="c-card-icon">◎</div>
+        <div class="c-card-lbl">Öffnungszeiten</div>
+        <div class="c-card-val">
+          <table class="hours-tbl">
+            <tr><td>Montag</td><td class="hours-closed">Geschlossen</td></tr>
+            <tr><td>Dienstag – Freitag</td><td>9:30 – 18:00 Uhr</td></tr>
+            <tr><td>Samstag</td><td>9:00 – 14:00 Uhr</td></tr>
+            <tr><td>Sonntag / Feiertag</td><td class="hours-closed">Geschlossen</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="c-card">
+        <div class="c-card-icon">❋</div>
+        <div class="c-card-lbl">Kontakt & Social Media</div>
+        <div class="c-card-val">
+          <a href="tel:051164613277"><strong style="color:var(--rose)">0511 / 646 132 77</strong></a><br><br>
+          <a href="https://www.instagram.com/Haarstudiowo_men/" target="_blank">Instagram: @Haarstudiowo_men</a><br>
+          <a href="https://www.facebook.com/haarstudiowomen/" target="_blank">Facebook: Haarstudio Women</a>
+        </div>
+        <div class="social-row">
+          <a class="soc-btn" href="https://www.instagram.com/Haarstudiowo_men/" target="_blank">IG</a>
+          <a class="soc-btn" href="https://www.facebook.com/haarstudiowomen/" target="_blank">FB</a>
+          <a class="soc-btn" href="tel:051164613277">☎</a>
+        </div>
+      </div>
+    </div>
+    <div class="map-wrap reveal">
+      <div class="map-pin">📍</div>
+      <div class="map-text">
+        <strong style="color:var(--sand)">Haarstudio Wo_Men</strong><br>
+        Tempelhofweg 4 · 30179 Hannover
+      </div>
+      <a href="https://maps.google.com/?q=Tempelhofweg+4+30179+Hannover" target="_blank" class="btn-outline map-btn" style="font-size:.72rem;padding:.7rem 1.8rem;">Route planen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Wo_Men</div>
+        <div class="footer-tagline">Haarstudio · Tempelhofweg 4 · 30179 Hannover</div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">Navigation</div>
+          <a href="#services">Leistungen</a>
+          <a href="#pricing">Preise</a>
+          <a href="#about">Über uns</a>
+          <a href="#contact">Kontakt</a>
+          <a href="#booking">Termin buchen</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Leistungen</div>
+          <a href="#pricing">Damenfriseur</a>
+          <a href="#pricing">Herrenfriseur</a>
+          <a href="#pricing">Farbe & Strähnen</a>
+          <a href="#pricing">Permanent Make-up</a>
+          <a href="#pricing">Nagel Design</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Kontakt</div>
+          <a href="tel:051164613277">0511 / 646 132 77</a>
+          <a href="https://www.instagram.com/Haarstudiowo_men/" target="_blank">Instagram</a>
+          <a href="https://www.facebook.com/haarstudiowomen/" target="_blank">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Haarstudio Wo_Men · Alle Rechte vorbehalten</div>
+      <div class="footer-soc">
+        <a class="soc-btn" href="https://www.instagram.com/Haarstudiowo_men/" target="_blank">IG</a>
+        <a class="soc-btn" href="https://www.facebook.com/haarstudiowomen/" target="_blank">FB</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  setTimeout(()=>{ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px'},80);
+});
+
+// ─── NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// ─── MOBILE NAV
+function toggleNav(){
+  const nl=document.getElementById('navLinks');
+  const open=nl.classList.toggle('open');
+  document.getElementById('navHam').textContent=open?'✕':'☰';
+}
+function closeNav(){
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navHam').textContent='☰';
+}
+
+// ─── REVEAL ON SCROLL
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ─── PRICING TABS
+function showTab(name){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+  const idx=['damen','herren','straehnen','special','nagel','extras'].indexOf(name);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('on');
+  document.getElementById('tp-'+name).classList.add('on');
+}
+
+// ─── FORM
+document.getElementById('dt').min=new Date().toISOString().split('T')[0];
+function handleSubmit(){
+  const fn=document.getElementById('fn').value.trim();
+  const ln=document.getElementById('ln').value.trim();
+  const ph=document.getElementById('ph').value.trim();
+  const svc=document.getElementById('svc').value;
+  const dt=document.getElementById('dt').value;
+  if(!fn||!ln||!ph||!svc||!dt){alert('Bitte füllen Sie alle Pflichtfelder (*) aus.');return;}
+  document.getElementById('bookingForm').style.display='none';
+  document.getElementById('successBox').style.display='block';
+}
+</script>
+</body>
+</html>
